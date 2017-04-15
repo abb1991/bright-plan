@@ -8,15 +8,18 @@ class App extends React.Component {
     super(props);
   }
 
-  click(){
+  addRiskLevel(){
     this.props.testClick();
   }
 
   render(){
     return(
       <div>
-        <h2>counter: {this.props.counter}</h2>
-        <button onClick={this.click.bind(this)}>Click</button>
+        <h2 id="risk-level">risk level: {this.props.riskLevel}</h2>
+        <form onSubmit={this.addRiskLevel.bind(this)}>
+          <input name="risk-level" placeholder="what is your risk level?" />
+          <input type="submit" value="submit" />
+        </form>
       </div>
       )
   }
@@ -24,7 +27,7 @@ class App extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    testClick: () => dispatch(CounterActions('Add'))
+    addRiskLevel: () => dispatch(RiskActions('AddRiskLevel'))
   }
 }
 
