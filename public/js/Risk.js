@@ -1,6 +1,9 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { CounterActions } from './actions'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { RiskActions } from './actions';
+import Chart from './Chart'
+import SliderBar from './SliderBar'
+
 
 class App extends React.Component {
 
@@ -8,26 +11,20 @@ class App extends React.Component {
     super(props);
   }
 
-  addRiskLevel(){
-    this.props.testClick();
-  }
 
   render(){
     return(
       <div>
-        <h2 id="risk-level">risk level: {this.props.riskLevel}</h2>
-        <form onSubmit={this.addRiskLevel.bind(this)}>
-          <input name="risk-level" placeholder="what is your risk level?" />
-          <input type="submit" value="submit" />
-        </form>
+        <SliderBar riskLevel={this.props.riskLevel} changeRiskLevel={this.props.changeRiskLevel} />
+        <Chart riskLevel={this.props.riskLevel} />
       </div>
       )
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
-    addRiskLevel: () => dispatch(RiskActions('AddRiskLevel'))
+  return {
+    changeRiskLevel: (num) => dispatch(RiskActions(num))
   }
 }
 

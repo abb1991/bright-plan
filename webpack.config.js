@@ -4,13 +4,18 @@ module.exports = {
     path: __dirname + '/public/js',
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {
-        exclude: /(node_modules)/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
+        exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          cacheDirectory: true,
+          presets: ['react', 'es2015']
         }
       }
     ]

@@ -1,18 +1,18 @@
 const initialState = {
-  counter: 0
+  riskLevel: 0
 }
 
-function counterApp(state, action){
+function riskApp(state, action){
   if(typeof state === "undefined") {
     return initialState;
   }
 
   switch(action.type){
-    case 'Add':
-      return Object.assign({}, state, { counter: state.counter + 1 });
+    case 'AddRiskLevel':
+      return Object.assign({}, state, { riskLevel: action.value });
     default:
       return state;
   }
 }
 
-export default counterApp;
+export default riskApp;

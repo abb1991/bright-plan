@@ -1,3 +1,3 @@
-export function CounterActions(){
-  return {type: "Add"}
+export function RiskActions(num){
+  return {type: "AddRiskLevel", value: num}
 }
