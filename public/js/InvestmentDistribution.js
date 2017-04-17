@@ -68,15 +68,5 @@ module.exports =  {
         }
     }
     return adjustments
-  },
-  balanceAdjustments(adjustments, recommended) {
-    let adjPairs, recPairs;
-
-    let over = 0;
-    let under = 0;
-    let even = [];
-    adjPairs = _.pairs(adjustments);
-    recPairs = _.pairs(recommended);
-    debugger;
   }
 }
