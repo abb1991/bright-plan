@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { RiskActions } from './actions';
+import { RiskActions, FundsActions } from './actions';
 import Chart from './Chart'
 import SliderBar from './SliderBar'
+import FundsChart from './FundsChart'
+import CurrentPortfolio from './CurrentPortfolio'
 
 
 class App extends React.Component {
@@ -11,12 +13,13 @@ class App extends React.Component {
     super(props);
   }
 
-
   render(){
     return(
       <div>
         <SliderBar riskLevel={this.props.riskLevel} changeRiskLevel={this.props.changeRiskLevel} />
         <Chart riskLevel={this.props.riskLevel} />
+        <CurrentPortfolio riskLevel={this.props.riskLevel} calcRedistribution={this.props.calcRedistribution} />
+        <FundsChart riskLevel={this.props.riskLevel} funds={this.props.funds} />
       </div>
       )
   }
@@ -24,7 +27,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeRiskLevel: (num) => dispatch(RiskActions(num))
+    changeRiskLevel:  (num) => dispatch(RiskActions(num)),
+    calcRedistribution: (funds)=> dispatch(FundsActions(funds))
   }
 }
 

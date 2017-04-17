@@ -1,1 +1,13 @@
-@import 'slider.css'
+@import 'slider.css';
+
+#risk-level {
+  padding: 3%;
+}
+
+.donutchart-innertext-label {
+  font-size: 2em;
+}
+
+.donutchart-innertext-value {
+  font-size: 1.5em;
+}

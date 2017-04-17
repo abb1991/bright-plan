@@ -1,3 +1,5 @@
+var _ = require("underscore")
+
 module.exports =  {
   calcRiskPercentage: (num) => {
     let cash, index, reits, gold, intlEquity, indexReits, goldIntlEquity;
@@ -23,5 +25,58 @@ module.exports =  {
     intlEquity = goldIntlEquity
 
     return {cash, index, reits, gold, intlEquity}
+  },
+  adjust(funds, riskLevel){
+    let recommendedTotals;
+    // get all the values for current investments and sum their total
+    let arr = this.validateInput(funds);
+    let total = _.reduce(arr, (start, num) => { return start + num; }, 0);
+    let riskPercentages = this.calcRiskPercentage(riskLevel);
+
+    // Multiply the recommended percentage for each investment by the sum total of user's current investments
+    recommendedTotals = _.mapObject(riskPercentages, (percentage, fund) => {
+        return Math.round(percentage * (total/100));
+    })
+    return recommendedTotals;
+  },
+  // test for non integer and malformed input
+  validateInput(funds){
+    let ints = [];
+    let vals = _.values(funds)
+    ints = vals.map((v)=>{
+        // remove $ and commas from user input
+        if (v !== '' && typeof v === "string") {
+            v = v.replace("$", "").replace(",", "")
+            if ( !isNaN(parseInt(v)) ) {
+                return parseInt(v);
+            }
+        } else {
+            return 0;
+        }
+    })
+    return ints
+  },
+  redistributeInvestments(funds, risk){
+    let adjustments = {};
+    let arr = this.validateInput(funds)
+    let total = _.reduce(arr, (start, num) => { return start + num; }, 0);
+    let recommended = this.adjust(funds, risk);
+    for(var f in funds) {
+        let t = recommended[f] - funds[f]
+        if(!isNaN(t)){
+            adjustments[f] = t;
+        }
+    }
+    return adjustments
+  },
+  balanceAdjustments(adjustments, recommended) {
+    let adjPairs, recPairs;
+
+    let over = 0;
+    let under = 0;
+    let even = [];
+    adjPairs = _.pairs(adjustments);
+    recPairs = _.pairs(recommended);
+    debugger;
   }
 }
