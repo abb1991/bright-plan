@@ -5,6 +5,7 @@ import Chart from './Chart'
 import SliderBar from './SliderBar'
 import FundsChart from './FundsChart'
 import CurrentPortfolio from './CurrentPortfolio'
+import Navbar from './navbar'
 
 
 class App extends React.Component {
@@ -16,9 +17,10 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <SliderBar riskLevel={this.props.riskLevel} changeRiskLevel={this.props.changeRiskLevel} />
+        <Navbar riskLevel={this.props.riskLevel} />
         <Chart riskLevel={this.props.riskLevel} />
-        <CurrentPortfolio riskLevel={this.props.riskLevel} calcRedistribution={this.props.calcRedistribution} />
+        <SliderBar riskLevel={this.props.riskLevel} changeRiskLevel={this.props.changeRiskLevel} />
+        <CurrentPortfolio riskLevel={this.props.riskLevel} funds={this.props.funds} calcRedistribution={this.props.calcRedistribution} />
         <FundsChart riskLevel={this.props.riskLevel} funds={this.props.funds} />
       </div>
       )

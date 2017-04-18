@@ -17,11 +17,11 @@ class FundsChart extends React.Component {
       funds.rebalanced = CALC.adjust(funds, this.props.riskLevel)
     }
     return(
-      <div>
+      <div id="funds-chart-container">
         { show > 0 ?
-          <table>
+          <table id="funds-chart-table">
             <tbody>
-              <tr>
+              <tr className="odd">
                 <th></th>
                 <th>Cash</th>
                 <th>Index Funds</th>
@@ -30,25 +30,25 @@ class FundsChart extends React.Component {
                 <th>International Equity</th>
                 <th>Other</th>
               </tr>
-              <tr>
+              <tr className="even">
                 <th>current</th>
-                <td>{funds.cash}</td>
-                <td>{funds.index}</td>
-                <td>{funds.reits}</td>
-                <td>{funds.gold}</td>
-                <td>{funds.intlEquity}</td>
-                <td>{funds.other}</td>
+                <td>{funds.cash !== "" ? funds.cash : 0}</td>
+                <td>{funds.index !== "" ? funds.index : 0}</td>
+                <td>{funds.reits !== "" ? funds.reits : 0}</td>
+                <td>{funds.gold !== "" ? funds.gold : 0}</td>
+                <td>{funds.intlEquity !== "" ? funds.intlEquity : 0}</td>
+                <td>{funds.other !== "" ? funds.other : 0}</td>
               </tr>
-              <tr>
+              <tr className="odd">
                 <th>change</th>
-                <td>{change.cash}</td>
-                <td>{change.index}</td>
-                <td>{change.reits}</td>
-                <td>{change.gold}</td>
-                <td>{change.intlEquity}</td>
-                <td>-{funds.other}</td>
+                <td className={ change.cash >= 0 ? "add-funds" : "sub-funds"}>{change.cash >= 0 ? "+" + change.cash : change.cash}</td>
+                <td className={ change.index >= 0 ? "add-funds" : "sub-funds"}>{change.index >= 0 ? "+" + change.index : change.index}</td>
+                <td className={ change.reits >= 0 ? "add-funds" : "sub-funds"}>{change.reits >= 0 ? "+" + change.reits : change.reits}</td>
+                <td className={ change.gold >= 0 ? "add-funds" : "sub-funds"}>{change.gold >= 0 ? "+" + change.gold : change.gold}</td>
+                <td className={ change.intlEquity >= 0 ? "add-funds" : "sub-funds"}>{change.intlEquity >= 0 ? "+" + change.intlEquity : change.intlEquity}</td>
+                <td className={ change.other >= 0 ? "add-funds" : "sub-funds"}>{funds.other === 0 ? 0 : (-1 * funds.other)}</td>
               </tr>
-              <tr>
+              <tr className="even">
                 <th>rebalanced</th>
                 <td>{funds.rebalanced.cash}</td>
                 <td>{funds.rebalanced.index}</td>

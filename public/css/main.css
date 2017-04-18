@@ -1,7 +1,126 @@
 @import 'slider.css';
 
-#risk-level {
-  padding: 3%;
+#app,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #002040;
+  fill: #002040;
+  font-family: 'PT Sans Narrow', sans-serif;
+  /*background-color: #002040;*/
+}
+
+/*navbar*/
+
+#navbar{
+  height: 10vh;
+  background-color: #002040;
+  margin: 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  opacity: .95;
+  z-index: 1;
+}
+#risk-level-nav,
+#navbar-logo {
+  font-family: MuseoSans,Lato,"Helvetica Neue", Helvetica,Arial,sans-serif;
+  color: white;
+  font-size: 2.5em;
+  text-align: center;
+  display: inline-block;
+  margin-top: 4vh;
+}
+
+#risk-level-nav {
+  float: left;
+  left: 5vw;
+  margin-top: 5.5vh;
+  font-size: 1.5em;
+  position: relative;
+}
+
+/*iphone*/
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+
+  #navbar-logo {
+    margin-top: 5.5vh;
+    font-size: 3.5em;
+    float: right;
+    margin-right: 5%;
+  }
+
+  #risk-level-nav {
+    font-size: 3.5em;
+    position: fixed;
+  }
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : landscape) {
+
+  #navbar-logo {
+    margin-top: 2.5vh;
+    font-size: 2em;
+    float: right;
+    margin-right: 5%;
+  }
+
+  #risk-level-nav {
+    margin-top: 2.8vh;
+    font-size: 2em;
+    position: fixed;
+  }
+}
+
+
+/*ipad*/
+@media only screen
+and (min-device-width : 668px)
+and (max-device-width : 1024px) {
+
+  #navbar-logo {
+    margin-top: 5vh;
+    font-size: 2.5em;
+    float: right;
+    margin-right: 5%;
+  }
+
+  #risk-level-nav {
+    font-size: 2.5em;
+    position: fixed;
+  }
+}
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+
+  #navbar-logo {
+    font-size: 2em;
+  }
+
+  #risk-level-nav {
+    font-size: 2em;
+  }
+}
+
+/*donutchart*/
+
+#donutchart-container {
+  padding-top: 12vh;
+  text-align: center;
+  background-color: #E5E8EB;
+}
+
+.donutchart-legend-item-label{
+  font-size: 1.2em;
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 .donutchart-innertext-label {
@@ -11,3 +130,383 @@
 .donutchart-innertext-value {
   font-size: 1.5em;
 }
+
+.donutchart-arcs-path {
+  transition: all .2s;
+}
+
+/*iphone*/
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+
+  .donutchart{
+    width: 100%;
+  }
+
+  .donutchart-legend-item-label{
+    font-size: 2.2em;
+    padding-top: 1vh;
+    font-weight: 200;
+    font-family: 'PT Sans Narrow', sans-serif;
+  }
+  .donutchart-innertext-label {
+    font-size: 3em;
+  }
+
+  .donutchart-innertext-value {
+    font-size: 2.5em;
+  }
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : landscape) {
+
+    #donutchart-container {
+      padding-top: 17vh;
+    }
+
+    .donutchart{
+      width: 70%;
+    }
+}
+
+/*ipad*/
+@media only screen
+and (min-device-width : 668px)
+and (max-device-width : 1024px) {
+  #donutchart-container {
+    padding-top: 12vh;
+    text-align: center;
+    background-color: #E5E8EB;
+  }
+
+  .donutchart-innertext-label {
+    font-size: 2.5em;
+  }
+
+  .donutchart-innertext-value {
+    font-size: 2.5em;
+  }
+
+  .donutchart-legend-item-label{
+    font-size: 2em;
+    padding-top: 1vh;
+    font-weight: 200;
+    font-family: 'PT Sans Narrow', sans-serif;
+  }
+}
+
+/*slider*/
+
+#slider-bar-container {
+  text-align: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  margin-top: 2vh;
+  margin-bottom: 7vh;
+}
+
+#risk-level {
+  padding: 3%;
+}
+
+/*iphone*/
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+
+  #slider-bar-container {
+    width: 100%;
+    text-align: center;
+    font-family: 'PT Sans Narrow', sans-serif;
+    margin-top: 5vh;
+  }
+
+  .rangeslider,
+  .rangeslider-horizontal{
+    width: 90%;
+    max-width: 90%;
+    height: 25px;
+    margin-bottom: 7vh;
+  }
+
+  .rangeslider__label-list,
+  .rangeslider__label {
+    font-size: 1.7em;
+  }
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : landscape) {
+  .rangeslider,
+  .rangeslider-horizontal{
+    width: 90%;
+    max-width: 90%;
+    height: 25px;
+    margin-bottom: 17vh;
+  }
+}
+
+/*ipad*/
+
+@media only screen
+and (min-device-width : 668px)
+and (max-device-width : 1024px) {
+
+  #slider-bar-container {
+    width: 100%;
+    text-align: center;
+    font-family: 'PT Sans Narrow', sans-serif;
+    margin-top: 5vh;
+  }
+
+  .rangeslider,
+  .rangeslider-horizontal{
+    width: 90%;
+    max-width: 90%;
+    height: 25px;
+    margin-bottom: 7vh;
+  }
+
+  .rangeslider__label-list,
+  .rangeslider__label {
+    font-size: 1.7em;
+  }
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+  .rangeslider,
+  .rangeslider-horizontal{
+    margin-bottom: 11vh;
+  }
+
+}
+
+/*current portfolio*/
+
+#current-portfolio-header{
+  text-align: center;
+}
+
+#show-form{
+  display: block;
+  color: white;
+  font-size: 1em;
+  opacity: .9;
+  margin: 0 auto;
+  margin-bottom: 1vh;
+}
+
+.form-style-4{
+    width: 100vw;
+    font-size: 1.1em;
+    background: #002040;
+    text-align: left;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    margin: 0;
+}
+.form-style-4 input[type=submit],
+.form-style-4 input[type=button],
+.form-style-4 input[type=text],
+.form-style-4 input[type=email],
+.form-style-4 label
+{
+    font-size: 1.1em;
+    color: #fff;
+
+}
+.form-style-4 label {
+    display:block;
+    margin-bottom: 10px;
+}
+.form-style-4 label > span{
+  display: inline-block;
+  text-align: right;
+  padding-right: 2%;
+  width: 10%;
+  margin-left: 36%;
+}
+
+.form-style-4 input[type=text],
+.form-style-4 input[type=email]
+{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #83A4C5;
+    width: 250px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.form-style-4 textarea:focus,
+.form-style-4 input[type=text]:focus,
+.form-style-4 input[type=email]:focus,
+.form-style-4 input[type=email] :focus
+{
+    border-bottom: 1px solid #D9FFA9;
+}
+
+.form-style-4 input[type=submit],
+.form-style-4 input[type=button],
+#show-form{
+    background: #576E86;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: #A8BACE;
+}
+.form-style-4 input[type=submit]:hover,
+.form-style-4 input[type=button]:hover{
+  background: #394D61;
+}
+
+/*iphone*/
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+
+  #current-portfolio-header{
+    font-size: 2.3em;
+  }
+
+  .form-style-4{
+    font-size: 2.1em;
+    padding-bottom: 10vh;
+  }
+
+  .form-style-4 label > span {
+    margin-left: 0;
+    width: 40%;
+  }
+
+  #show-form {
+    font-size: 2.3em;
+    width: 100%;
+    border-radius: 0;
+    height: 5vh;
+    margin: 0;
+    color: white;
+  }
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : landscape) {
+
+  #show-form {
+    height: 15vh;
+  }
+}
+
+/*ipad*/
+@media only screen
+and (min-device-width : 668px)
+and (max-device-width : 1024px) {
+
+  #current-portfolio-header{
+    font-size: 2em;
+  }
+
+  .form-style-4{
+    font-size: 2em;
+    padding-bottom: 10vh;
+  }
+
+
+
+  #show-form {
+    font-size: 2.3em;
+    width: 100%;
+    border-radius: 0;
+    height: 5vh;
+    margin: 0;
+    color: white;
+  }
+  .form-style-4 input[type=submit] {
+    margin-top: 2%;
+    font-size: 1em;
+    padding: 2%
+  }
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+  #show-form {
+      font-size: 1.5em;
+      height: 8vh;
+  }
+
+  .form-style-4{
+    font-size: 1.5em;
+    padding-bottom: 5vh;
+  }
+}
+
+
+
+/*funds chart*/
+#funds-chart-container {
+  width: 100%;
+  display: inline-block;
+  background-color: #E5E8EB;
+  padding-bottom: 10%;
+}
+
+#funds-chart-table {
+  border-bottom: 1px solid black;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#funds-chart-table td,
+#funds-chart-table th {
+  text-align: center;
+  font-size: 1.4em;
+  height: 5vh;
+}
+
+#funds-chart-table th {
+  font-weight: 900;
+}
+
+.odd {
+  background-color: white;
+}
+
+.even {
+  background-color: #CCF1FF;
+}
+
+.add-funds {
+  color: green;
+}
+
+.sub-funds {
+  color: red;
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+
+  #funds-chart-table td, #funds-chart-table th {
+      font-size: 2.0em;
+      height: 5vh;
+      min-width: 12vw;
+  }
+}
+
