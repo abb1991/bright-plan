@@ -4974,7 +4974,7 @@ module.exports = canDefineProperty;
 "use strict";
 
 
-var _ = __webpack_require__(333);
+var _ = __webpack_require__(332);
 
 module.exports = {
     calcRiskPercentage: function calcRiskPercentage(num) {
@@ -5055,17 +5055,6 @@ module.exports = {
             }
         }
         return adjustments;
-    },
-    balanceAdjustments: function balanceAdjustments(adjustments, recommended) {
-        var adjPairs = void 0,
-            recPairs = void 0;
-
-        var over = 0;
-        var under = 0;
-        var even = [];
-        adjPairs = _.pairs(adjustments);
-        recPairs = _.pairs(recommended);
-        debugger;
     }
 };
 
@@ -11930,6 +11919,10 @@ var _CurrentPortfolio = __webpack_require__(150);
 
 var _CurrentPortfolio2 = _interopRequireDefault(_CurrentPortfolio);
 
+var _navbar = __webpack_require__(334);
+
+var _navbar2 = _interopRequireDefault(_navbar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11953,9 +11946,10 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_SliderBar2.default, { riskLevel: this.props.riskLevel, changeRiskLevel: this.props.changeRiskLevel }),
+        _react2.default.createElement(_navbar2.default, { riskLevel: this.props.riskLevel }),
         _react2.default.createElement(_Chart2.default, { riskLevel: this.props.riskLevel }),
-        _react2.default.createElement(_CurrentPortfolio2.default, { riskLevel: this.props.riskLevel, calcRedistribution: this.props.calcRedistribution }),
+        _react2.default.createElement(_SliderBar2.default, { riskLevel: this.props.riskLevel, changeRiskLevel: this.props.changeRiskLevel }),
+        _react2.default.createElement(_CurrentPortfolio2.default, { riskLevel: this.props.riskLevel, funds: this.props.funds, calcRedistribution: this.props.calcRedistribution }),
         _react2.default.createElement(_FundsChart2.default, { riskLevel: this.props.riskLevel, funds: this.props.funds })
       );
     }
@@ -12072,24 +12066,25 @@ var Chart = function (_React$Component) {
             var e = CALC.calcRiskPercentage(this.props.riskLevel);
             return _react2.default.createElement(
                 'div',
-                null,
+                { id: 'donutchart-container' },
                 _react2.default.createElement(_reactDonutChart2.default, {
                     data: [{
-                        label: 'Index Funds',
-                        value: e.index
+                        value: e.index,
+                        label: 'Index Funds'
                     }, {
-                        label: 'REITS',
-                        value: e.reits
+                        value: e.reits,
+                        label: 'REITS'
                     }, {
-                        label: 'Gold',
-                        value: e.gold
+                        value: e.gold,
+                        label: 'Gold'
                     }, {
-                        label: 'International Equity',
-                        value: e.intlEquity
+                        value: e.intlEquity,
+                        label: 'International Equity'
                     }, {
-                        label: 'Cash',
-                        value: e.cash
-                    }] })
+                        value: e.cash,
+                        label: 'Cash'
+                    }] }),
+                _react2.default.createElement('hr', null)
             );
         }
     }]);
@@ -12132,13 +12127,24 @@ var CurrentPortfolio = function (_React$Component) {
   function CurrentPortfolio(props) {
     _classCallCheck(this, CurrentPortfolio);
 
-    return _possibleConstructorReturn(this, (CurrentPortfolio.__proto__ || Object.getPrototypeOf(CurrentPortfolio)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (CurrentPortfolio.__proto__ || Object.getPrototypeOf(CurrentPortfolio)).call(this, props));
+
+    _this.state = {
+      showForm: true
+    };
+    return _this;
   }
 
   _createClass(CurrentPortfolio, [{
+    key: 'show',
+    value: function show() {
+      this.setState({ showForm: !this.state.showForm });
+    }
+  }, {
     key: 'rebalance',
     value: function rebalance(event) {
       event.preventDefault();
+      this.setState({ showForm: false });
       var funds = {};
       funds.cash = event.target.cash.value;
       funds.index = event.target.index.value;
@@ -12155,52 +12161,90 @@ var CurrentPortfolio = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement('hr', null),
         _react2.default.createElement(
           'h2',
-          null,
-          'Please enter dollar amounts for your current investment portfolio to recieve rebalancing suggestions'
+          { id: 'current-portfolio-header' },
+          'Enter dollar amounts for current investments to recieve rebalanced portfolio'
         ),
-        _react2.default.createElement(
+        this.state.showForm ? _react2.default.createElement(
           'form',
-          { id: 'rebalance-form', onSubmit: this.rebalance.bind(this) },
+          { id: 'funds-form', className: 'form-style-4', onSubmit: this.rebalance.bind(this) },
           _react2.default.createElement(
             'label',
             null,
-            'Cash'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Cash'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'cash', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'cash', type: 'text', placeholder: '.00' }),
           _react2.default.createElement(
             'label',
             null,
-            'Index Funds'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Index Funds'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'index', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'index', type: 'text', placeholder: '.00' }),
           _react2.default.createElement(
             'label',
             null,
-            'REITS'
+            _react2.default.createElement(
+              'span',
+              null,
+              'REITS'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'reits', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'reits', type: 'text', placeholder: '.00' }),
           _react2.default.createElement(
             'label',
             null,
-            'Gold'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Gold'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'gold', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'gold', type: 'text', placeholder: '.00' }),
           _react2.default.createElement(
             'label',
             null,
-            'International Equity'
+            _react2.default.createElement(
+              'span',
+              null,
+              'International Equity'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'intlEquity', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'intlEquity', type: 'text', placeholder: '.00' }),
           _react2.default.createElement(
             'label',
             null,
-            'Other'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Other'
+            ),
+            _react2.default.createElement('input', { type: 'text', name: 'other', placeholder: '.00' })
           ),
-          _react2.default.createElement('input', { name: 'other', type: 'text', placeholder: '.00' }),
-          _react2.default.createElement('input', { type: 'submit', value: 'adjust' })
-        )
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement(
+              'span',
+              null,
+              '\xA0'
+            ),
+            _react2.default.createElement('input', { id: 'submit-btn', type: 'submit', value: 'adjust' })
+          )
+        ) : !this.state.showForm && Object.getOwnPropertyNames(this.props.funds).length > 0 ? _react2.default.createElement(
+          'button',
+          { id: 'show-form', type: 'button', onClick: this.show.bind(this) },
+          'change investment amounts'
+        ) : null
       );
     }
   }]);
@@ -12263,16 +12307,16 @@ var FundsChart = function (_React$Component) {
       }
       return _react2.default.createElement(
         'div',
-        null,
+        { id: 'funds-chart-container' },
         show > 0 ? _react2.default.createElement(
           'table',
-          null,
+          { id: 'funds-chart-table' },
           _react2.default.createElement(
             'tbody',
             null,
             _react2.default.createElement(
               'tr',
-              null,
+              { className: 'odd' },
               _react2.default.createElement('th', null),
               _react2.default.createElement(
                 'th',
@@ -12307,7 +12351,7 @@ var FundsChart = function (_React$Component) {
             ),
             _react2.default.createElement(
               'tr',
-              null,
+              { className: 'even' },
               _react2.default.createElement(
                 'th',
                 null,
@@ -12316,37 +12360,37 @@ var FundsChart = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                funds.cash
+                funds.cash !== "" ? funds.cash : 0
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                funds.index
+                funds.index !== "" ? funds.index : 0
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                funds.reits
+                funds.reits !== "" ? funds.reits : 0
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                funds.gold
+                funds.gold !== "" ? funds.gold : 0
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                funds.intlEquity
+                funds.intlEquity !== "" ? funds.intlEquity : 0
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                funds.other
+                funds.other !== "" ? funds.other : 0
               )
             ),
             _react2.default.createElement(
               'tr',
-              null,
+              { className: 'odd' },
               _react2.default.createElement(
                 'th',
                 null,
@@ -12354,39 +12398,38 @@ var FundsChart = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                change.cash
+                { className: change.cash >= 0 ? "add-funds" : "sub-funds" },
+                change.cash >= 0 ? "+" + change.cash : change.cash
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                change.index
+                { className: change.index >= 0 ? "add-funds" : "sub-funds" },
+                change.index >= 0 ? "+" + change.index : change.index
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                change.reits
+                { className: change.reits >= 0 ? "add-funds" : "sub-funds" },
+                change.reits >= 0 ? "+" + change.reits : change.reits
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                change.gold
+                { className: change.gold >= 0 ? "add-funds" : "sub-funds" },
+                change.gold >= 0 ? "+" + change.gold : change.gold
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                change.intlEquity
+                { className: change.intlEquity >= 0 ? "add-funds" : "sub-funds" },
+                change.intlEquity >= 0 ? "+" + change.intlEquity : change.intlEquity
               ),
               _react2.default.createElement(
                 'td',
-                null,
-                '-',
-                funds.other
+                { className: change.other >= 0 ? "add-funds" : "sub-funds" },
+                funds.other === 0 ? 0 : -1 * funds.other
               )
             ),
             _react2.default.createElement(
               'tr',
-              null,
+              { className: 'even' },
               _react2.default.createElement(
                 'th',
                 null,
@@ -12488,14 +12531,14 @@ var SliderBar = function (_React$Component) {
     value: function render() {
       var value = this.props.riskLevel || 0;
       var l = {
-        0: 'Low Risk',
-        5: 'Medium Risk',
-        10: 'High Risk'
+        0: 'Low',
+        5: 'Medium',
+        10: 'High'
       };
 
       return _react2.default.createElement(
         'div',
-        null,
+        { id: 'slider-bar-container' },
         _react2.default.createElement(_reactRangeslider2.default, {
           min: 0,
           max: 10,
@@ -12503,13 +12546,7 @@ var SliderBar = function (_React$Component) {
           value: value,
           labels: l,
           onChange: this.toggleRiskLevel.bind(this),
-          onChangeComplete: this.onChangeComplete.bind(this) }),
-        _react2.default.createElement(
-          'h2',
-          { id: 'risk-level' },
-          'risk level: ',
-          value
-        )
+          onChangeComplete: this.onChangeComplete.bind(this) })
       );
     }
   }]);
@@ -24988,7 +25025,7 @@ var Legend = function (_Component) {
                             opacity = 1;
                         } else {
                             classes.selected = true;
-                            opacity = 0.5;
+                            opacity = 1;
                         }
                     }
 
@@ -28343,7 +28380,7 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(145), __webpack_require__(332)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(145), __webpack_require__(333)(module)))
 
 /***/ }),
 /* 331 */
@@ -28376,34 +28413,6 @@ function symbolObservablePonyfill(root) {
 
 /***/ }),
 /* 332 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -29956,6 +29965,94 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
   }
 }.call(this));
 
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(7);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Navbar = function (_React$Component) {
+  _inherits(Navbar, _React$Component);
+
+  function Navbar() {
+    _classCallCheck(this, Navbar);
+
+    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+  }
+
+  _createClass(Navbar, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "nav",
+        { id: "navbar" },
+        _react2.default.createElement(
+          "span",
+          { id: "risk-level-nav" },
+          "Risk: ",
+          this.props.riskLevel
+        ),
+        _react2.default.createElement(
+          "span",
+          { id: "navbar-logo" },
+          "Bright Plan"
+        )
+      );
+    }
+  }]);
+
+  return Navbar;
+}(_react2.default.Component);
+
+exports.default = Navbar;
 
 /***/ })
 /******/ ]);

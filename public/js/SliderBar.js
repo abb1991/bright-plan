@@ -18,13 +18,13 @@ class SliderBar extends React.Component {
   render(){
     const value = this.props.riskLevel || 0;
     const l = {
-      0: 'Low Risk',
-      5: 'Medium Risk',
-      10: 'High Risk'
+      0: 'Low',
+      5: 'Medium',
+      10: 'High'
     }
 
     return(
-        <div>
+        <div id="slider-bar-container">
           <Slider
             min={0}
             max={10}
@@ -33,7 +33,6 @@ class SliderBar extends React.Component {
             labels={l}
             onChange={this.toggleRiskLevel.bind(this)}
             onChangeComplete={this.onChangeComplete.bind(this)} />
-          <h2 id="risk-level">risk level: {value}</h2>
         </div>
       )
   }

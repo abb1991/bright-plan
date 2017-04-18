@@ -4,10 +4,18 @@ const CALC = require('./InvestmentDistribution.js')
 class CurrentPortfolio extends React.Component {
   constructor(props){
     super(props);
+    this.state={
+      showForm: true
+    }
+  }
+
+  show(){
+    this.setState({showForm: !this.state.showForm})
   }
 
   rebalance(event){
     event.preventDefault();
+    this.setState({showForm: false})
     const funds = {};
     funds.cash = event.target.cash.value
     funds.index = event.target.index.value
@@ -22,22 +30,37 @@ class CurrentPortfolio extends React.Component {
   render(){
     return(
       <div>
-        <h2>Please enter dollar amounts for your current investment portfolio to recieve rebalancing suggestions</h2>
-        <form id="rebalance-form" onSubmit={this.rebalance.bind(this)}>
-          <label>Cash</label>
-          <input name="cash" type="text" placeholder=".00" />
-          <label>Index Funds</label>
-          <input name="index" type="text" placeholder=".00" />
-          <label>REITS</label>
-          <input name="reits" type="text" placeholder=".00" />
-          <label>Gold</label>
-          <input name="gold" type="text" placeholder=".00" />
-          <label>International Equity</label>
-          <input name="intlEquity" type="text" placeholder=".00" />
-          <label>Other</label>
-          <input name="other" type="text" placeholder=".00" />
-          <input type="submit" value="adjust" />
+        <hr />
+        <h2 id="current-portfolio-header">Enter dollar amounts for current investments to recieve rebalanced portfolio</h2>
+
+        { this.state.showForm ?
+        <form id="funds-form" className="form-style-4" onSubmit={this.rebalance.bind(this)}>
+          <label >
+            <span>Cash</span><input type="text" name="cash" placeholder=".00" />
+          </label>
+          <label >
+            <span>Index Funds</span><input type="text" name="index" placeholder=".00" />
+          </label>
+          <label>
+            <span>REITS</span><input type="text" name="reits" placeholder=".00" />
+          </label>
+          <label>
+            <span>Gold</span><input type="text" name="gold" placeholder=".00" />
+          </label>
+          <label>
+            <span>International Equity</span><input type="text" name="intlEquity" placeholder=".00" />
+          </label>
+          <label>
+            <span>Other</span><input type="text" name="other" placeholder=".00" />
+          </label>
+          <label>
+            <span>&nbsp;</span><input id="submit-btn" type="submit" value="adjust" />
+          </label>
         </form>
+        :
+        !this.state.showForm && Object.getOwnPropertyNames(this.props.funds).length > 0 ?
+          <button id="show-form" type="button" onClick={this.show.bind(this)}>change investment amounts</button>
+        : null }
       </div>
       )
   }

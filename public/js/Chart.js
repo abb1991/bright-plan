@@ -11,28 +11,29 @@ class Chart extends React.Component {
   render(){
     var e = CALC.calcRiskPercentage(this.props.riskLevel)
     return(
-      <div>
+      <div id="donutchart-container">
         <DonutChart
             data={[{
-                label: 'Index Funds',
-                value: e.index
+                value: e.index,
+                label: 'Index Funds'
             },
             {
-                label: 'REITS',
-                value: e.reits
+                value: e.reits,
+                label: 'REITS'
             },
             {
-                label: 'Gold',
-                value: e.gold
+                value: e.gold,
+                label: 'Gold'
             },
             {
-                label: 'International Equity',
-                value: e.intlEquity
+                value: e.intlEquity,
+                label: 'International Equity'
             },
             {
-                label: 'Cash',
-                value: e.cash
+                value: e.cash,
+                label: 'Cash'
             }]} />
+            <hr />
       </div>
     )
   }
