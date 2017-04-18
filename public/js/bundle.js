@@ -4976,6 +4976,7 @@ module.exports = canDefineProperty;
 
 var _ = __webpack_require__(333);
 
+// this module takes risk level and user investment portfolio and returns an ideal portfolio as a perctentage, as well as dollar amounts
 module.exports = {
     calcRiskPercentage: function calcRiskPercentage(num) {
         var cash = void 0,
@@ -5049,6 +5050,7 @@ module.exports = {
         }, 0);
         var recommended = this.adjust(funds, risk);
         for (var f in funds) {
+            // create new properties on the adjustments object with the specific investment type as a key, and the difference between the ideal and current invesment as its value
             var t = recommended[f] - funds[f];
             if (!isNaN(t)) {
                 adjustments[f] = t;

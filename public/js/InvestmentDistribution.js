@@ -1,5 +1,6 @@
 var _ = require("underscore")
 
+// this module takes risk level and user investment portfolio and returns an ideal portfolio as a perctentage, as well as dollar amounts
 module.exports =  {
   calcRiskPercentage: (num) => {
     let cash, index, reits, gold, intlEquity, indexReits, goldIntlEquity;
@@ -62,6 +63,7 @@ module.exports =  {
     let total = _.reduce(arr, (start, num) => { return start + num; }, 0);
     let recommended = this.adjust(funds, risk);
     for(var f in funds) {
+        // create new properties on the adjustments object with the specific investment type as a key, and the difference between the ideal and current invesment as its value
         let t = recommended[f] - funds[f]
         if(!isNaN(t)){
             adjustments[f] = t;
