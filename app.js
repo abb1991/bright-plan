@@ -4,6 +4,7 @@ var path = require('path');
 
 // Define the port to run on
 app.set('port', 3000);
+app.set('port', (process.env.PORT || 3000));
 
 
 // Locate the views
@@ -24,3 +25,5 @@ var server = app.listen(app.get('port'), function() {
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + '/views/index.html'));
 })
+
+
