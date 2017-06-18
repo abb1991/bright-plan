@@ -5033,6 +5033,7 @@ module.exports = {
             // remove $ and commas from user input
             if (v !== '' && typeof v === "string") {
                 v = v.replace("$", "").replace(",", "");
+                // /\W.()/
                 if (!isNaN(parseInt(v))) {
                     return parseInt(v);
                 }
@@ -12664,7 +12665,7 @@ var Navbar = function (_React$Component) {
         _react2.default.createElement(
           "span",
           { id: "navbar-logo" },
-          "Bright Plan"
+          "Investment Calculator"
         )
       );
     }

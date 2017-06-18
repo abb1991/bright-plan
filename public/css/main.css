@@ -165,13 +165,13 @@ and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
 
-    #donutchart-container {
-      padding-top: 17vh;
-    }
+  #donutchart-container {
+    padding-top: 17vh;
+  }
 
-    .donutchart{
-      width: 70%;
-    }
+  .donutchart{
+    width: 70%;
+  }
 }
 
 /*ipad*/

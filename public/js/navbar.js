@@ -6,7 +6,7 @@ class Navbar extends React.Component {
     return(
       <nav id="navbar">
         <span id="risk-level-nav">Risk: {this.props.riskLevel}</span>
-        <span id="navbar-logo">Bright Plan</span>
+        <span id="navbar-logo">Investment Calculator</span>
       </nav>
       )
   }
