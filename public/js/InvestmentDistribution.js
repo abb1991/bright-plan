@@ -48,6 +48,7 @@ module.exports =  {
         // remove $ and commas from user input
         if (v !== '' && typeof v === "string") {
             v = v.replace("$", "").replace(",", "")
+            // /\W.()/
             if ( !isNaN(parseInt(v)) ) {
                 return parseInt(v);
             }
